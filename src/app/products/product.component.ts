@@ -1,15 +1,20 @@
 import {Component} from '@angular/core';
+import {IProduct} from './products'
 
 @Component({
     selector:'product-list',
-    templateUrl:'./product.component.html'
+    templateUrl:'./product.component.html',
+    //styles:['thead{color:skyblue}','h3{color:red}']
+    styleUrls:['./product.component.css']
 })
 
 export class ProductComponent{
     title:string="***Product List***";
     showHide=true;
     ShowImage=false;
-    products:any[]=[
+    filterProduct;
+    imgWidth=50;
+    products:IProduct[]=[
         {  
             "productId": 1,
             "productName": "Leaf Rake",

@@ -5,6 +5,9 @@ import {FormsModule} from '@angular/forms'
 import {AppComponent} from './app.component';
 import {RoboComponent} from './robot.component'
 import { ProductComponent } from "./products/product.component";
+import { ProductFilter } from "./products/products-filter.pipe";
+import { StarComponent } from "./shared/star.component";
+
 
 @NgModule({
     imports:[
@@ -14,7 +17,9 @@ import { ProductComponent } from "./products/product.component";
     declarations:[
         AppComponent,
         RoboComponent,
-        ProductComponent
+        ProductComponent,
+        ProductFilter,
+        StarComponent
     ],
     bootstrap:[
         AppComponent

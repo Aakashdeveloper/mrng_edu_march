@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {IProduct} from './products'
+import {IProduct} from './products';
+import {ProductService} from './product.service';
 
 @Component({
     selector:'product-list',
@@ -14,37 +15,19 @@ export class ProductComponent implements OnInit{
     ShowImage=false;
     filterProduct;
     imgWidth=50;
+    errorMessage:string;
 
-    constructor(){}
-    products:IProduct[]=[
-        {  
-            "productId": 1,
-            "productName": "Leaf Rake",
-            "productCode": "GDN-0011",
-            "releaseDate": "March 19, 2016",
-            "description": "Leaf rake with 48-inch wooden handle.",
-            "price": 19.95,
-            "starRating": 3.5,
-            "imageUrl": "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
-        },
-        {
-            "productId": 2,
-            "productName": "Garden Cart",
-            "productCode": "GDN-0023",
-            "releaseDate": "March 18, 2016",
-            "description": "15 gallon capacity rolling garden cart",
-            "price": 32.99,
-            "starRating": 4.7,
-            "imageUrl": "http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
-        }
-    ]
+    constructor(private _productService:ProductService){}
+    products:IProduct[]
 
     toggleImage():void{
         this.ShowImage = !this.ShowImage
     }
 
     ngOnInit():void{
-        console.log("<<<<<<<<<<<<<<this is init<<<<<<<<<<<<<")
+       this._productService.getProducts()
+            .subscribe((data)=> this.products= data,
+                        (error)=>this.errorMessage=<any>error);
     }
 
     onRatingClicked(message:string){
@@ -63,4 +46,11 @@ One Way Binding
 --Property Binding[]
 --Event Binding()
 Two Way Binding[()]
+
+
+A coding pattern in which a class receives the instances of object it need from
+extrenal source rather  than creating it.
+
+Service
+
 */

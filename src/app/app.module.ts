@@ -14,6 +14,7 @@ import { ProductDetail } from "./products/product-detail.component";
 import { OrderComponent } from "./orders/order.component";
 import { NotFound } from "./shared/notFound.component";
 import { HomeComponent } from "./home/home.component";
+import { ProductGaurd } from "./products/product-gaurd.service";
 
 
 @NgModule({
@@ -21,7 +22,16 @@ import { HomeComponent } from "./home/home.component";
         BrowserModule,
         FormsModule,
         HttpModule,
-        RouterModule
+        RouterModule.forRoot([
+            
+            {path:'products',component:ProductComponent},
+            {path:'products/:id',canActivate:[ProductGaurd], component:ProductDetail},
+            {path:'orders',component:OrderComponent},
+            {path:'home',component:HomeComponent},
+            {path:'',redirectTo:'home',pathMatch:'full'},
+            {path:'**',component:NotFound}
+            
+        ])
     ],
     declarations:[
         AppComponent,
@@ -38,7 +48,8 @@ import { HomeComponent } from "./home/home.component";
         AppComponent
     ],
     providers:[
-        ProductService
+        ProductService,
+        ProductGaurd
     ]
 })
 
